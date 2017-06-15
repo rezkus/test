@@ -1,0 +1,50 @@
+
+apply plugin: 'org.springframework.boot'
+
+buildscript
+{
+	repositories
+	{
+		mavenCentral()
+	}
+
+	dependencies
+	{
+		classpath('org.springframework.boot:spring-boot-gradle-plugin:1.4.3.RELEASE')
+	}
+}
+
+
+
+jar
+{
+	baseName = 'paas-02'
+	version = '0.1.0'
+}
+
+repositories
+{
+	jcenter()
+}
+
+configurations
+{
+	providedRuntime
+}
+
+task (distclean, dependsOn: clean) <<
+{
+	delete ".gradle"
+}
+
+configure(distclean)
+{
+	group = 'Build'
+	description = 'Clean the build result and the .gradle directory'
+}
+
+dependencies
+{
+	compile('org.springframework.boot:spring-boot-starter-web:1.4.3.RELEASE')
+	providedRuntime('org.springframework.boot:spring-boot-starter-tomcat:1.4.3.RELEASE')
+}
